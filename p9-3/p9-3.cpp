@@ -22,42 +22,63 @@ void displayRun(int values[], int size) {
 
         // If run is found, display it in parentheses
         if (j - i > 1) {
-           cout << "(";
+            cout << "(";
             for (int k = i; k < j; ++k) {
                 cout << values[k];
                 if (k < j - 1) {
-                   cout << " "; 
+                    cout << " ";
                 }
             }
             cout << ")";
-            i = j;  
+            i = j;
         }
         else {
-            
-          cout << values[i];
+
+            cout << values[i];
             ++i;
         }
 
-       
+
         if (i < size) {
             cout << " ";
         }
     }
-    cout << endl; 
+    cout << endl;
 }
+    // Function to check if there is any run in the array
+    bool hasRun(int values[], int size) {
+        for (int i = 0; i < size - 1; ++i) {
+           
+            if (values[i] == values[i + 1]) {
+                return true;  // A run is found
+            }
+        }
+        return false;  // No run found
+    } 
 
-int main() {
-    const int SIZE = 20;  // Total number of die rolls
-    int dieRolls[SIZE];
 
-    // Seed the random number generator
-    srand(time(0));
 
-    // Generate the die rolls
-    generateDieRolls(dieRolls, SIZE);
+    int main() {
+        const int SIZE = 20;  // Total number of die rolls
+        int dieRolls[SIZE];
 
-    // Display the die rolls with runs marked
-    displayRun(dieRolls, SIZE);
+        // Seed the random number generator
+        srand(time(0));
 
-    return 0;
-}
+        // Generate the die rolls
+        generateDieRolls(dieRolls, SIZE);
+
+        // Display the die rolls with runs marked
+        displayRun(dieRolls, SIZE);
+
+        // Check if there is any run and display the result
+        if (hasRun(dieRolls, SIZE)) {
+            std::cout << "The array has a run." << std::endl;
+        }
+        else {
+            std::cout << "The array does not have a run." << std::endl;
+        }
+
+        return 0;
+    }
+
